@@ -7,16 +7,16 @@ interface IPropsButton {
   onClick?: React.MouseEventHandler<HTMLButtonElement>;
 }
 
-function ButtonComp({ label, className, isCancel=false, onClick }: IPropsButton) {
+function ButtonComp({ label = 'OK', className, isCancel=false, onClick }: IPropsButton) {
   return !isCancel ? (
     <button
-      className={`${className ?? ""} bg-orange-500 min-w-[178px] min-h-12 rounded-xl p-3.5 text-white flex gap-2`}
+      className={`${className ?? ""} flex justify-center cursor-pointer bg-orange-500 min-w-[178px] min-h-12 rounded-xl p-3.5 text-white flex gap-2`}
       onClick={onClick}
     >
-      {label ?? "OK"}
+      {label}
     </button>
   ) : (
-    <button className={`${className ?? ""} text-[orange-500]  min-w-44.5 min-h-12 rounded-xl p-3.5 text-white flex gap-2`}>{label}</button>
+    <button className={`${className ?? ""} cursor-pointer text-[orange-500] min-w-44.5 min-h-12 rounded-xl p-3.5 text-white flex gap-2`}>{label}</button>
   );
 }
 
