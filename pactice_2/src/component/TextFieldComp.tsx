@@ -1,18 +1,27 @@
 import { InputAdornment, TextField } from "@mui/material";
 import SearchIcon from '@mui/icons-material/Search';
-export default function TextFieldComp() {
+interface IProps {
+  value: string
+  placeholder?: string;
+  label?: string;
+  isSearchButton?: boolean;
+  onChange: (e: string) => void;
+}
+export default function TextFieldComp(props: IProps) {
   return (
-    <TextField id="outlined-basic" label="" variant="outlined" placeholder="This is Placeholder" 
+    <TextField id="outlined-basic" label={props.label} variant="outlined" placeholder={props.placeholder}
+    value={props.value} onChange={(e) => props.onChange(e.target.value)}
     slotProps={{
       input: {
         startAdornment: (
-          <InputAdornment position="start">
+          props.isSearchButton ? <InputAdornment position="start">
             <SearchIcon sx={{ color: '#FFFFFF'}} />
-          </InputAdornment>
+          </InputAdornment> : null
         ),
       },
     }}
     sx={{
+      width: "100%",
       '& ::placeholder': {
         color: '#889898',
       },
@@ -22,7 +31,7 @@ export default function TextFieldComp() {
       '& .MuiInputBase-input': {
         color: '#E0E6E9',
         height: '48px',
-        padding: '0'
+        padding: '0 10px'
       },
       '& .MuiOutlinedInput-notchedOutline': {
         borderColor: '#393C49'

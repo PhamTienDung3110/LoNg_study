@@ -1,7 +1,18 @@
+import { useEffect, useState } from "react";
 import SideBarComp from "../component/sidebar";
 import TextFieldComp from "../component/TextFieldComp";
-
+import DropDownMenuComp from "../component/DropDownMenu";
+const optionsDropDown = [
+  { value: 'all', label: 'All' },
+  { value: 'food', label: 'Food' }, 
+]
 export default function Dashboard() {
+  const [valueTextFieldComp, setValueTextFieldComp] = useState("")
+  const [valueDropDownMenuComp, setValueDropDownMenuComp] = useState("")
+  const [openDropDownMenuComp, setOpenDropDownMenuComp] = useState(false)
+  useEffect(() => {
+    console.log("valueDropDownMenuComp: ", valueDropDownMenuComp)
+  }, [valueDropDownMenuComp])
   return (
     <div>
       <div className="flex justify-between bg-bg-primary text-white">
@@ -16,7 +27,18 @@ export default function Dashboard() {
           </div>
           <div>
             {/* <input type="text" placeholder="Search for food, coffe, etc.." /> */}
-            <TextFieldComp />
+              <TextFieldComp isSearchButton placeholder="Search for food, coffe, etc.." value={valueTextFieldComp} 
+            onChange={(e) => setValueTextFieldComp(e)} />
+            <div style={{ width: '300px', marginTop: '16px' }}>
+              <DropDownMenuComp 
+              options={optionsDropDown} 
+              value={valueDropDownMenuComp} 
+              open={openDropDownMenuComp}
+              onChange={(e) => setValueDropDownMenuComp(e)}
+              onClose={() => setOpenDropDownMenuComp(false)}
+              onOpen={() => setOpenDropDownMenuComp(true)}
+            />
+            </div>
           </div>
         </div>
         {/* content */}
